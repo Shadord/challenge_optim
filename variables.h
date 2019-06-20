@@ -3,12 +3,18 @@ typedef struct {
 	int id_container;
   int posX;
   int posY;
-  char name[];
+  char name[5];
+  int placed;
 } Container;
 
 typedef struct {
-  int nb_container;
-  int height;
-  int size;
-	Container **baie;
+  int nb_container; // Nombre de container dans le port
+  int maxHeight; // Hauteur max (taille max d'une colonne)
+  int maxWidth; // Taille des lignes
+  int heights[]; // Contient la taille actuelle de chaque colonne
+	Container ***baie; // Matrice d'adresse des containers
 } Port;
+
+typedef struct {
+  Container **liste_containers;
+} Data;
