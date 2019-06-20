@@ -291,7 +291,11 @@ int operations(Port *P, Data *D) {
             ids = ids*10 + ((int)id[4] - 48);
           }
         }
-        while(checkContainer(P));
+        if(instance > 10){
+          while(checkContainer(P));
+        }else{
+          checkContainer(P);
+        }
         if(isReady(P, D->liste_containers[ids-1]) == 0){
           moveContainer(P, P->baie[D->liste_containers[ids-1]->posX][D->liste_containers[ids-1]->posY-1]);
         }
@@ -306,7 +310,12 @@ int operations(Port *P, Data *D) {
             ids = ids*10 + ((int)id[4] - 48);
           }
         }
-        while(checkContainer(P));
+        if(instance > 10){
+          while(checkContainer(P));
+        }else{
+          checkContainer(P);
+        }
+
         addContainer(P, D->liste_containers[ids-1]);
       }
       i++;
