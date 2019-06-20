@@ -16,6 +16,8 @@ int extFichier(int back, int new){
 }
 
 int isReady(Port *P, Container *C);
+void addContainer(Port *P, Container *C_a_add);
+void addContainercolumn(Port *P, Container *C_a_add);
 
 int initContainer(Port *P) {
       char filename[40];
@@ -147,7 +149,10 @@ int moveContainer(Port *P, Container *C) {
     if(isReady(P, C)){
       P->baie[C->posX][C->posY]=NULL; // enlever le conteneur de l'ancienne nouv_pile
       P->heights[C->posX]--;
-
+      addContainercolumn(P,C);
+      moves++;
+      break;
+/*
       for(int i = 0; i < P->maxWidth; i++) {
         if(P->heights[i] < P->maxHeight && i != C->posX ){ //on déplace le container dans la première colonne libre différente de la précédente
           C->placed = 1;
@@ -165,7 +170,7 @@ int moveContainer(Port *P, Container *C) {
       }
       if(moved == 1){
         break;
-      }
+      }*/
     }else{
       moveContainer(P, P->baie[C->posX][C->posY-1]);
     }
@@ -200,6 +205,36 @@ int checkContainer(Port *P){ // regarde si on peux faire un move de contener
     }
   }
   return result;
+}
+
+void addContainercolumn(Port *P, Container *C_a_add){
+  int back;
+  for (int i=0; i<P->maxWidth;i++){
+      int dpl = isLowerContain(P, C_a_add);
+      if(dpl != -1 && P->heights[dpl] < P->maxHeight) {
+        back = C_a_add->posX;
+        C_a_add->posX = dpl;
+        extFichier(back-1, C_a_add->posX);
+        C_a_add->posY = P->maxHeight-P->heights[dpl]-1;
+        printf("Ajout du container %s à [%d, %d]\n", C_a_add->name, C_a_add->posX, C_a_add->posY);
+        P->baie[C_a_add->posX][C_a_add->posY] = C_a_add;
+        P->heights[C_a_add->posX]++;
+        return;
+      }
+    }
+    for(int i = 0; i < P->maxWidth; i++){
+      if(P->heights[i] < P->maxHeight && i != C_a_add->posX){
+        back = C_a_add->posX;
+        C_a_add->posX = i;
+        extFichier(back-1, C_a_add->posX);
+        C_a_add->placed = 1;
+        C_a_add->posY = P->maxHeight-P->heights[i]-1;
+        printf("Ajout du container %s às [%d, %d]\n", C_a_add->name, C_a_add->posX, C_a_add->posY);
+        P->baie[C_a_add->posX][C_a_add->posY] = C_a_add;
+        P->heights[C_a_add->posX]++;
+        break;
+      }
+  }
 }
 
 void addContainer(Port *P, Container *C_a_add){

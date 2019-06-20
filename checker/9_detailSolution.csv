@@ -39,14 +39,14 @@ Relocalisation du container 15 (pile 1 vers pile 2)
    18   15    3   25   23
     5   22   20   12   19
 
-Relocalisation du container 11 (pile 3 vers pile 2)
+Ajout du container 2 (pile 1)
     0    0    0    0    0
-    0    0    0    8    0
-    4   11    0   21    9
+    2    0    0    8    0
+    4    0   11   21    9
    18   15    3   25   23
     5   22   20   12   19
 
-Ajout du container 2 (pile 1)
+Relocalisation du container 11 (pile 3 vers pile 2)
     0    0    0    0    0
     2    0    0    8    0
     4   11    0   21    9
