@@ -109,6 +109,10 @@ int addContainer(Port *P, Container *C) {
   }
 }
 
+int isReady(Port *P, Container *C) {
+  if(P->baie[C->posX][P->maxWidth-C->posY] != NULL)
+}
+
 
 
 
@@ -118,5 +122,6 @@ int main(int argc, char const *argv[]) {
   initContainer(&P);
   placerContainer(&P, &D);
   draw(&P);
+  moveContainer(&P, )
   return 0;
 }
