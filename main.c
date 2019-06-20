@@ -3,7 +3,7 @@
 #include "variables.h"
 #include "stdlib.h"
 
-#define INSTANCE 1
+#define INSTANCE 13
 
 int moves = 0;
 
@@ -44,6 +44,10 @@ void draw(Port *P) {
       }
       printf("|\n|");
     }
+    for(int j = 0; j < P->maxWidth; j++) {
+      printf("  %d  ", P->heights[j]);
+    }
+    printf("Nombre de déplacements : %d\n", moves);
   }
 
 int placerContainer(Port *P, Data *D) {
@@ -93,20 +97,37 @@ int placerContainer(Port *P, Data *D) {
   }
 }
 
+int min(Port *P, int indice){
+  int minimum_colonne = 1000;
+  for(int i = 0; i < P->maxHeight; i++){
+    Container *C_colonne_min = P->baie[indice][i];
+    if(C_colonne_min != NULL){
+      if(minimum_colonne > C_colonne_min->id_container){
+        minimum_colonne = C_colonne_min->id_container;
 
+      }
 
-int addContainer(Port *P, Container *C) {
-  if(C->placed == 1){
-    printf("The container %s is already placed\n", C->name);
-  }
-  for(int i = 0; i < P->maxWidth; i++) {
-    if(P->heights[i] < P->maxHeight){ // On peut ajouter le container dans cette colonne
-      P->baie[i][P->maxHeight-P->heights[i]-1] = C;
-      C->placed = 1;
-      printf("The container %s has been placed at [%d, %d]\n", C->name, i, P->maxHeight-P->heights[i]-1);
     }
   }
+
+  return minimum_colonne;
+
 }
+
+int isLowerContain(Port *P, Container *C_a_test) {
+  int id = C_a_test->id_container;
+  int minimum_colonne = -1;
+  for(int i = 0; i < P->maxWidth; i++){
+    minimum_colonne = min(P, i);
+    if(id < minimum_colonne){
+      return i;
+    }
+
+  }
+  return -1;
+
+}
+
 
 int moveContainer(Port *P, Container *C) {
   int moved = 0;
@@ -136,6 +157,54 @@ int moveContainer(Port *P, Container *C) {
     }
   }
 
+}
+
+void checkContainer(Port *P){ // regarde si on peux faire un move de contener
+  printf("Check container\n");
+  for(int i = 0; i < P->maxWidth; i++){ // Pour chaque colonne
+    Container *C_haut = P->baie[i][P->maxHeight-P->heights[i]];
+    if(P->heights[i] != 0){
+      if(C_haut->id_container != min(P, i)){
+        int dpl = isLowerContain(P, C_haut); // Si le container le plus haut et bougeable dpl != 0
+        if(dpl != -1 && dpl != C_haut->posX) { //Le container est bougeable dans la colonne dpl
+          P->baie[C_haut->posX][C_haut->posY]=NULL; // enlever le conteneur de l'ancienne nouv_pile
+          P->heights[C_haut->posX]--;
+          C_haut->posX = dpl;
+          C_haut->posY = P->maxHeight-P->heights[dpl]-1;
+          printf("Optimisation du container %s à [%d, %d]\n", C_haut->name, C_haut->posX, C_haut->posY);
+          P->baie[C_haut->posX][C_haut->posY] = C_haut;
+          moves++;
+          P->heights[C_haut->posX]++;
+          break;
+        }
+      }
+    }
+  }
+}
+
+void addContainer(Port *P, Container *C_a_add){
+  for(int i = 0; i < P->maxWidth; i++){
+    int dpl = isLowerContain(P, C_a_add);
+    if(dpl != -1 && P->heights[dpl] < P->maxHeight) {
+      C_a_add->posX = dpl;
+      C_a_add->posY = P->maxHeight-P->heights[dpl]-1;
+      printf("Ajout du container %s à [%d, %d]\n", C_a_add->name, C_a_add->posX, C_a_add->posY);
+      P->baie[C_a_add->posX][C_a_add->posY] = C_a_add;
+      P->heights[C_a_add->posX]++;
+      return;
+    }
+  }
+  for(int i = 0; i < P->maxWidth; i++){
+    if(P->heights[i] < P->maxHeight){
+      C_a_add->posX = i;
+      C_a_add->placed = 1;
+      C_a_add->posY = P->maxHeight-P->heights[i]-1;
+      printf("Ajout du container %s às [%d, %d]\n", C_a_add->name, C_a_add->posX, C_a_add->posY);
+      P->baie[C_a_add->posX][C_a_add->posY] = C_a_add;
+      P->heights[C_a_add->posX]++;
+      break;
+    }
+  }
 }
 
 
@@ -190,16 +259,30 @@ int operations(Port *P, Data *D) {
       printf("%s -- %c\n", id, c);
       if(c == 'R'){
         ids = (int)id[2] - 48;
-        printf("%d\n", ids);
         if(id[3] != NULL){
           ids = ids*10 + ((int)id[3] - 48);
+          if(id[4] != NULL){
+            ids = ids*10 + ((int)id[4] - 48);
+          }
         }
-        printf("%d\n", ids);
+        checkContainer(P);
         if(isReady(P, D->liste_containers[ids-1]) == 0){
           moveContainer(P, P->baie[D->liste_containers[ids-1]->posX][D->liste_containers[ids-1]->posY-1]);
-
         }
         removeContainer(P, D->liste_containers[ids-1]);
+      }
+
+      if(c == 'A'){
+        ids = (int)id[2] - 48;
+        if(id[3] != NULL){
+          ids = ids*10 + ((int)id[3] - 48);
+          if(id[4] != NULL){
+            ids = ids*10 + ((int)id[4] - 48);
+          }
+        }
+
+        checkContainer(P);
+        addContainer(P, D->liste_containers[ids-1]);
       }
       i++;
       draw(P);
@@ -207,12 +290,13 @@ int operations(Port *P, Data *D) {
 }
 
 
-
 int main(int argc, char const *argv[]) {
+
   Port P;
   Data D;
   initContainer(&P);
   placerContainer(&P, &D);
+  draw(&P);
   operations(&P, &D);
   printf("Déplacements : %d\n", moves);
   return 0;
