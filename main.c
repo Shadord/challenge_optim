@@ -33,9 +33,10 @@ void placerContainer(Port *P) {
     if (ligne>0)
       {
         Container *C = (Container *)malloc(sizeof(Container));
+        fseek(fp, 21, SEEK_SET);
         fscanf(fp, "%s, %d, %d", C->name, C->posX, C->posY);
-        C->id = ligne;
-        P->baie[PosX-1][PosY-1]=C;
+        C->id_container = ligne;
+        P->baie[PosX-1][P->height-PosY]=C;
       }
     ligne++;
   }
