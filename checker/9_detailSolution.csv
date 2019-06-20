@@ -1,0 +1,120 @@
+    0    0    0    0    0
+    0    0    0    0    0
+    8   15   11   21    9
+   18    1    3   25   23
+    5   22   20   12   19
+
+Relocalisation du container 8 (pile 1 vers pile 4)
+    0    0    0    0    0
+    0    0    0    8    0
+    0   15   11   21    9
+   18    1    3   25   23
+    5   22   20   12   19
+
+Ajout du container 4 (pile 1)
+    0    0    0    0    0
+    0    0    0    8    0
+    4   15   11   21    9
+   18    1    3   25   23
+    5   22   20   12   19
+
+Relocalisation du container 15 (pile 2 vers pile 1)
+    0    0    0    0    0
+   15    0    0    8    0
+    4    0   11   21    9
+   18    1    3   25   23
+    5   22   20   12   19
+
+Retrait du container 1 (pile 2)
+    0    0    0    0    0
+   15    0    0    8    0
+    4    0   11   21    9
+   18    0    3   25   23
+    5   22   20   12   19
+
+Relocalisation du container 15 (pile 1 vers pile 2)
+    0    0    0    0    0
+    0    0    0    8    0
+    4    0   11   21    9
+   18   15    3   25   23
+    5   22   20   12   19
+
+Ajout du container 2 (pile 1)
+    0    0    0    0    0
+    2    0    0    8    0
+    4    0   11   21    9
+   18   15    3   25   23
+    5   22   20   12   19
+
+Relocalisation du container 11 (pile 3 vers pile 2)
+    0    0    0    0    0
+    2    0    0    8    0
+    4   11    0   21    9
+   18   15    3   25   23
+    5   22   20   12   19
+
+Ajout du container 13 (pile 1)
+   13    0    0    0    0
+    2    0    0    8    0
+    4   11    0   21    9
+   18   15    3   25   23
+    5   22   20   12   19
+
+Ajout du container 7 (pile 2)
+   13    0    0    0    0
+    2    7    0    8    0
+    4   11    0   21    9
+   18   15    3   25   23
+    5   22   20   12   19
+
+Relocalisation du container 13 (pile 1 vers pile 2)
+    0   13    0    0    0
+    2    7    0    8    0
+    4   11    0   21    9
+   18   15    3   25   23
+    5   22   20   12   19
+
+Retrait du container 2 (pile 1)
+    0   13    0    0    0
+    0    7    0    8    0
+    4   11    0   21    9
+   18   15    3   25   23
+    5   22   20   12   19
+
+Ajout du container 16 (pile 1)
+    0   13    0    0    0
+   16    7    0    8    0
+    4   11    0   21    9
+   18   15    3   25   23
+    5   22   20   12   19
+
+Retrait du container 3 (pile 3)
+    0   13    0    0    0
+   16    7    0    8    0
+    4   11    0   21    9
+   18   15    0   25   23
+    5   22   20   12   19
+
+Relocalisation du container 16 (pile 1 vers pile 3)
+    0   13    0    0    0
+    0    7    0    8    0
+    4   11    0   21    9
+   18   15   16   25   23
+    5   22   20   12   19
+
+Retrait du container 4 (pile 1)
+    0   13    0    0    0
+    0    7    0    8    0
+    0   11    0   21    9
+   18   15   16   25   23
+    5   22   20   12   19
+
+Ajout du container 6 (pile 1)
+    0   13    0    0    0
+    0    7    0    8    0
+    6   11    0   21    9
+   18   15   16   25   23
+    5   22   20   12   19
+
+ERREUR : fichier solution indique 1 2
+Relocalisation impossible (pile de destination pleine)

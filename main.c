@@ -3,15 +3,23 @@
 #include "variables.h"
 #include "stdlib.h"
 
-#define INSTANCE 13
+#define INSTANCE 6
+
+int instance = INSTANCE;
 
 int moves = 0;
+
+FILE *fpe = NULL;
+
+int extFichier(int back, int new){
+  fprintf(fpe, "%d , %d\n", back+1, new+1);
+}
 
 int isReady(Port *P, Container *C);
 
 int initContainer(Port *P) {
       char filename[40];
-      sprintf(filename, "instances/%d_global.csv", INSTANCE);
+      sprintf(filename, "instances/%d_global.csv", instance);
       FILE* fp = NULL;
       fp = fopen(filename, "r");
 
@@ -52,7 +60,7 @@ void draw(Port *P) {
 
 int placerContainer(Port *P, Data *D) {
   char filename[40];
-  sprintf(filename, "instances/%d_position.csv", INSTANCE);
+  sprintf(filename, "instances/%d_position.csv", instance);
   FILE *fp = NULL;
   fp = fopen(filename, "r");
 
@@ -88,6 +96,8 @@ int placerContainer(Port *P, Data *D) {
 
       if(C->posX == -1){
         C->placed = 0;
+        C->posX = 0;
+        C->posY = 0;
       }else{
         C->placed = 1;
         P->baie[C->posX][C->posY] = C;
@@ -131,6 +141,7 @@ int isLowerContain(Port *P, Container *C_a_test) {
 
 int moveContainer(Port *P, Container *C) {
   int moved = 0;
+  int back;
   while(1){
     if(isReady(P, C)){
       P->baie[C->posX][C->posY]=NULL; // enlever le conteneur de l'ancienne nouv_pile
@@ -139,7 +150,9 @@ int moveContainer(Port *P, Container *C) {
       for(int i = 0; i < P->maxWidth; i++) {
         if(P->heights[i] < P->maxHeight && i != C->posX ){ //on déplace le container dans la première colonne libre différente de la précédente
           C->placed = 1;
+          back = C->posX;
           C->posX = i;
+          extFichier(back, C->posX);
           C->posY = P->maxHeight-P->heights[i]-1;
           P->heights[i]++;
           P->baie[C->posX][C->posY] = C;
@@ -161,15 +174,18 @@ int moveContainer(Port *P, Container *C) {
 
 void checkContainer(Port *P){ // regarde si on peux faire un move de contener
   printf("Check container\n");
+  int back;
   for(int i = 0; i < P->maxWidth; i++){ // Pour chaque colonne
     Container *C_haut = P->baie[i][P->maxHeight-P->heights[i]];
     if(P->heights[i] != 0){
-      if(C_haut->id_container != min(P, i)){
+      if(C_haut->id_container != min(P, i) && P->heights[i] < P->maxHeight){
         int dpl = isLowerContain(P, C_haut); // Si le container le plus haut et bougeable dpl != 0
         if(dpl != -1 && dpl != C_haut->posX) { //Le container est bougeable dans la colonne dpl
           P->baie[C_haut->posX][C_haut->posY]=NULL; // enlever le conteneur de l'ancienne nouv_pile
           P->heights[C_haut->posX]--;
+          back = C_haut->posX;
           C_haut->posX = dpl;
+          extFichier(back, C_haut->posX);
           C_haut->posY = P->maxHeight-P->heights[dpl]-1;
           printf("Optimisation du container %s à [%d, %d]\n", C_haut->name, C_haut->posX, C_haut->posY);
           P->baie[C_haut->posX][C_haut->posY] = C_haut;
@@ -183,10 +199,13 @@ void checkContainer(Port *P){ // regarde si on peux faire un move de contener
 }
 
 void addContainer(Port *P, Container *C_a_add){
+  int back;
   for(int i = 0; i < P->maxWidth; i++){
     int dpl = isLowerContain(P, C_a_add);
     if(dpl != -1 && P->heights[dpl] < P->maxHeight) {
+      back = C_a_add->posX;
       C_a_add->posX = dpl;
+      extFichier(back-1, C_a_add->posX);
       C_a_add->posY = P->maxHeight-P->heights[dpl]-1;
       printf("Ajout du container %s à [%d, %d]\n", C_a_add->name, C_a_add->posX, C_a_add->posY);
       P->baie[C_a_add->posX][C_a_add->posY] = C_a_add;
@@ -196,7 +215,9 @@ void addContainer(Port *P, Container *C_a_add){
   }
   for(int i = 0; i < P->maxWidth; i++){
     if(P->heights[i] < P->maxHeight){
+      back = C_a_add->posX;
       C_a_add->posX = i;
+      extFichier(back-1, C_a_add->posX);
       C_a_add->placed = 1;
       C_a_add->posY = P->maxHeight-P->heights[i]-1;
       printf("Ajout du container %s às [%d, %d]\n", C_a_add->name, C_a_add->posX, C_a_add->posY);
@@ -230,6 +251,7 @@ int removeContainer(Port *P, Container *C){
     P->baie[C->posX][C->posY]=NULL; // enlever le conteneur de l'ancienne nouv_pile
     P->heights[C->posX]--;
     C->placed = 0;
+    extFichier(C->posX, -1);
     return 1;
   }else{
     return 0;
@@ -238,7 +260,7 @@ int removeContainer(Port *P, Container *C){
 
 int operations(Port *P, Data *D) {
   char filename[40];
-  sprintf(filename, "instances/%d_operations.csv", INSTANCE);
+  sprintf(filename, "instances/%d_operations.csv", instance);
   FILE *fp = NULL;
   fp = fopen(filename, "r");
 
@@ -290,7 +312,31 @@ int operations(Port *P, Data *D) {
 }
 
 
+
+
+
 int main(int argc, char const *argv[]) {
+  int resultats[20];
+  char filename[30];
+  sprintf(filename, "checker/%d_solution.csv", INSTANCE);
+  fpe = fopen(filename, "wr");
+  fprintf(fpe, "FROM , TO\n");
+  /*for(int i = 0; i < 20; i++){
+
+    Port P;
+    Data D;
+    initContainer(&P);
+    placerContainer(&P, &D);
+    draw(&P);
+    operations(&P, &D);
+    printf("Instance %d = %d déplacements\n", instance, moves);
+    resultats[i] = moves;
+    moves = 0;
+    instance++;
+  }
+  for(int i = 0; i < 20; i++){
+    printf("Instance %d = %d déplacements\n", i, resultats[i]);
+  }*/
 
   Port P;
   Data D;

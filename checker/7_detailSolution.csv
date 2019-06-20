@@ -1,0 +1,357 @@
+    0    0    0    0    0
+    0    0    0    0    0
+    2   17    3   14   24
+   10   11    7   15   13
+    6    9   23   19   25
+
+Ajout du container 18 (pile 1)
+    0    0    0    0    0
+   18    0    0    0    0
+    2   17    3   14   24
+   10   11    7   15   13
+    6    9   23   19   25
+
+Ajout du container 1 (pile 1)
+    1    0    0    0    0
+   18    0    0    0    0
+    2   17    3   14   24
+   10   11    7   15   13
+    6    9   23   19   25
+
+Ajout du container 4 (pile 2)
+    1    0    0    0    0
+   18    4    0    0    0
+    2   17    3   14   24
+   10   11    7   15   13
+    6    9   23   19   25
+
+Retrait du container 1 (pile 1)
+    0    0    0    0    0
+   18    4    0    0    0
+    2   17    3   14   24
+   10   11    7   15   13
+    6    9   23   19   25
+
+Ajout du container 5 (pile 4)
+    0    0    0    0    0
+   18    4    0    5    0
+    2   17    3   14   24
+   10   11    7   15   13
+    6    9   23   19   25
+
+Ajout du container 16 (pile 1)
+   16    0    0    0    0
+   18    4    0    5    0
+    2   17    3   14   24
+   10   11    7   15   13
+    6    9   23   19   25
+
+Relocalisation du container 16 (pile 1 vers pile 2)
+    0   16    0    0    0
+   18    4    0    5    0
+    2   17    3   14   24
+   10   11    7   15   13
+    6    9   23   19   25
+
+Relocalisation du container 18 (pile 1 vers pile 3)
+    0   16    0    0    0
+    0    4   18    5    0
+    2   17    3   14   24
+   10   11    7   15   13
+    6    9   23   19   25
+
+Retrait du container 2 (pile 1)
+    0   16    0    0    0
+    0    4   18    5    0
+    0   17    3   14   24
+   10   11    7   15   13
+    6    9   23   19   25
+
+Relocalisation du container 10 (pile 1 vers pile 5)
+    0   16    0    0    0
+    0    4   18    5   10
+    0   17    3   14   24
+    0   11    7   15   13
+    6    9   23   19   25
+
+Ajout du container 21 (pile 1)
+    0   16    0    0    0
+    0    4   18    5   10
+    0   17    3   14   24
+   21   11    7   15   13
+    6    9   23   19   25
+
+Relocalisation du container 18 (pile 3 vers pile 1)
+    0   16    0    0    0
+    0    4    0    5   10
+   18   17    3   14   24
+   21   11    7   15   13
+    6    9   23   19   25
+
+Retrait du container 3 (pile 3)
+    0   16    0    0    0
+    0    4    0    5   10
+   18   17    0   14   24
+   21   11    7   15   13
+    6    9   23   19   25
+
+Relocalisation du container 16 (pile 2 vers pile 1)
+    0    0    0    0    0
+   16    4    0    5   10
+   18   17    0   14   24
+   21   11    7   15   13
+    6    9   23   19   25
+
+Retrait du container 4 (pile 2)
+    0    0    0    0    0
+   16    0    0    5   10
+   18   17    0   14   24
+   21   11    7   15   13
+    6    9   23   19   25
+
+Retrait du container 5 (pile 4)
+    0    0    0    0    0
+   16    0    0    0   10
+   18   17    0   14   24
+   21   11    7   15   13
+    6    9   23   19   25
+
+Ajout du container 8 (pile 2)
+    0    0    0    0    0
+   16    8    0    0   10
+   18   17    0   14   24
+   21   11    7   15   13
+    6    9   23   19   25
+
+Ajout du container 12 (pile 4)
+    0    0    0    0    0
+   16    8    0   12   10
+   18   17    0   14   24
+   21   11    7   15   13
+    6    9   23   19   25
+
+Relocalisation du container 16 (pile 1 vers pile 2)
+    0   16    0    0    0
+    0    8    0   12   10
+   18   17    0   14   24
+   21   11    7   15   13
+    6    9   23   19   25
+
+Relocalisation du container 18 (pile 1 vers pile 3)
+    0   16    0    0    0
+    0    8    0   12   10
+    0   17   18   14   24
+   21   11    7   15   13
+    6    9   23   19   25
+
+Relocalisation du container 21 (pile 1 vers pile 3)
+    0   16    0    0    0
+    0    8   21   12   10
+    0   17   18   14   24
+    0   11    7   15   13
+    6    9   23   19   25
+
+Retrait du container 6 (pile 1)
+    0   16    0    0    0
+    0    8   21   12   10
+    0   17   18   14   24
+    0   11    7   15   13
+    0    9   23   19   25
+
+Relocalisation du container 21 (pile 3 vers pile 1)
+    0   16    0    0    0
+    0    8    0   12   10
+    0   17   18   14   24
+    0   11    7   15   13
+   21    9   23   19   25
+
+Relocalisation du container 18 (pile 3 vers pile 1)
+    0   16    0    0    0
+    0    8    0   12   10
+    0   17    0   14   24
+   18   11    7   15   13
+   21    9   23   19   25
+
+Retrait du container 7 (pile 3)
+    0   16    0    0    0
+    0    8    0   12   10
+    0   17    0   14   24
+   18   11    0   15   13
+   21    9   23   19   25
+
+Relocalisation du container 16 (pile 2 vers pile 1)
+    0    0    0    0    0
+    0    8    0   12   10
+   16   17    0   14   24
+   18   11    0   15   13
+   21    9   23   19   25
+
+Retrait du container 8 (pile 2)
+    0    0    0    0    0
+    0    0    0   12   10
+   16   17    0   14   24
+   18   11    0   15   13
+   21    9   23   19   25
+
+Relocalisation du container 17 (pile 2 vers pile 3)
+    0    0    0    0    0
+    0    0    0   12   10
+   16    0    0   14   24
+   18   11   17   15   13
+   21    9   23   19   25
+
+Ajout du container 22 (pile 1)
+    0    0    0    0    0
+   22    0    0   12   10
+   16    0    0   14   24
+   18   11   17   15   13
+   21    9   23   19   25
+
+Relocalisation du container 11 (pile 2 vers pile 1)
+   11    0    0    0    0
+   22    0    0   12   10
+   16    0    0   14   24
+   18    0   17   15   13
+   21    9   23   19   25
+
+Retrait du container 9 (pile 2)
+   11    0    0    0    0
+   22    0    0   12   10
+   16    0    0   14   24
+   18    0   17   15   13
+   21    0   23   19   25
+
+Retrait du container 10 (pile 5)
+   11    0    0    0    0
+   22    0    0   12    0
+   16    0    0   14   24
+   18    0   17   15   13
+   21    0   23   19   25
+
+Relocalisation du container 24 (pile 5 vers pile 2)
+   11    0    0    0    0
+   22    0    0   12    0
+   16    0    0   14    0
+   18    0   17   15   13
+   21   24   23   19   25
+
+Retrait du container 11 (pile 1)
+    0    0    0    0    0
+   22    0    0   12    0
+   16    0    0   14    0
+   18    0   17   15   13
+   21   24   23   19   25
+
+Relocalisation du container 22 (pile 1 vers pile 2)
+    0    0    0    0    0
+    0    0    0   12    0
+   16    0    0   14    0
+   18   22   17   15   13
+   21   24   23   19   25
+
+Retrait du container 12 (pile 4)
+    0    0    0    0    0
+    0    0    0    0    0
+   16    0    0   14    0
+   18   22   17   15   13
+   21   24   23   19   25
+
+Retrait du container 13 (pile 5)
+    0    0    0    0    0
+    0    0    0    0    0
+   16    0    0   14    0
+   18   22   17   15    0
+   21   24   23   19   25
+
+Retrait du container 14 (pile 4)
+    0    0    0    0    0
+    0    0    0    0    0
+   16    0    0    0    0
+   18   22   17   15    0
+   21   24   23   19   25
+
+Retrait du container 15 (pile 4)
+    0    0    0    0    0
+    0    0    0    0    0
+   16    0    0    0    0
+   18   22   17    0    0
+   21   24   23   19   25
+
+Retrait du container 16 (pile 1)
+    0    0    0    0    0
+    0    0    0    0    0
+    0    0    0    0    0
+   18   22   17    0    0
+   21   24   23   19   25
+
+Retrait du container 17 (pile 3)
+    0    0    0    0    0
+    0    0    0    0    0
+    0    0    0    0    0
+   18   22    0    0    0
+   21   24   23   19   25
+
+Ajout du container 20 (pile 2)
+    0    0    0    0    0
+    0    0    0    0    0
+    0   20    0    0    0
+   18   22    0    0    0
+   21   24   23   19   25
+
+Retrait du container 18 (pile 1)
+    0    0    0    0    0
+    0    0    0    0    0
+    0   20    0    0    0
+    0   22    0    0    0
+   21   24   23   19   25
+
+Retrait du container 19 (pile 4)
+    0    0    0    0    0
+    0    0    0    0    0
+    0   20    0    0    0
+    0   22    0    0    0
+   21   24   23    0   25
+
+Retrait du container 20 (pile 2)
+    0    0    0    0    0
+    0    0    0    0    0
+    0    0    0    0    0
+    0   22    0    0    0
+   21   24   23    0   25
+
+Retrait du container 21 (pile 1)
+    0    0    0    0    0
+    0    0    0    0    0
+    0    0    0    0    0
+    0   22    0    0    0
+    0   24   23    0   25
+
+Retrait du container 22 (pile 2)
+    0    0    0    0    0
+    0    0    0    0    0
+    0    0    0    0    0
+    0    0    0    0    0
+    0   24   23    0   25
+
+Retrait du container 23 (pile 3)
+    0    0    0    0    0
+    0    0    0    0    0
+    0    0    0    0    0
+    0    0    0    0    0
+    0   24    0    0   25
+
+Retrait du container 24 (pile 2)
+    0    0    0    0    0
+    0    0    0    0    0
+    0    0    0    0    0
+    0    0    0    0    0
+    0    0    0    0   25
+
+Retrait du container 25 (pile 5)
+    0    0    0    0    0
+    0    0    0    0    0
+    0    0    0    0    0
+    0    0    0    0    0
+    0    0    0    0    0
+
+Nombre de relocalisations : 15
