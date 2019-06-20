@@ -53,7 +53,7 @@ int placerContainer(Port *P, Data *D) {
       printf("\nImpossible de charger l'instance");
       return 0;
   }
-  
+
   P->baie = (Container***) malloc(P->maxWidth * sizeof(Container**));
   D->liste_containers = (Container**) malloc(P->nb_container * sizeof(Container*));
   for(int i = 0; i < P->maxWidth; i++) {
@@ -84,6 +84,20 @@ int placerContainer(Port *P, Data *D) {
       D->liste_containers[i] = C;
   }
 }
+
+int addContainer(Port *P, Container *C) {
+  if(C->placed == 1){
+    printf("The container %s is already placed\n", C->name);
+  }
+  for(int i = 0; i < P->maxWidth; i++) {
+    if(P->heights[i] < P->maxHeight){ // On peut ajouter le container dans cette colonne
+      P->baie[i][P->maxHeight-P->heights[i]-1] = C;
+      C->placed = 1;
+      printf("The container %s has been placed at [%d, %d]\n", C->name, i, P->maxHeight-P->heights[i]-1);
+    }
+  }
+}
+
 int main(int argc, char const *argv[]) {
   Port P;
   Data D;
