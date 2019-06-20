@@ -90,7 +90,9 @@ int moveContainer(Port P, Container C) {
   int former_PosY = P->maxHeight-posY; // position y dans la matrice
   P->baie[former_PosX-1][P->maxHeight-former_PosY]=NULL; // enlever le conteneur de l'ancienne nouv_pile
   nouv_PosX = 0;
-  while (heights[nouvPos_X]<4 ||nouv_PosX!=formerPosX)
+  while (heights[nouv_PosX]<4 ||nouv_PosX!=formerPosX){
+
+  }
 
 }
 
