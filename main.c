@@ -1,73 +1,94 @@
 #include "stdio.h"
 #include "string.h"
-#include <variable.h>
+#include "variables.h"
+#include "stdlib.h"
 
-void initContainer(Port *P, Data *D) {
+#define INSTANCE 20
 
+int initContainer(Port *P) {
+      char filename[40];
+      sprintf(filename, "instances/%d_global.csv", INSTANCE);
       FILE* fp = NULL;
-      fp = fopen("instances/1_global.csv", "r");
-      fseek(fp, 10, SEET_SET);
+      fp = fopen(filename, "r");
+
 
       if (fp == NULL) {
         printf("\nImpossible de charger l'instance");
         return 0;
       }
+      fseek(fp, 10, SEEK_SET);
 
-      fscanf(fp, "%d , %d , %d",P->nb_container, P->width, P->height);
+      fscanf(fp, "%d , %d , %d",&P->nb_container, &P->maxWidth, &P->maxHeight);
 
       fclose(fp);
       return 1;
 }
 
-P->baie = (Container***) malloc(P->width * sizeof(Container**));
-D->liste_containers = (Container**) malloc(P->nb_container * sizeof(Container*));
-for(int i = 0; i < P->width; i++) {
-  P->baie[i] = (Container**) malloc(P->height * sizeof(Container*));
-}
-P->heights = (int*) malloc(P->width * sizeof(int));
-// Donc si on résume P[x][y] est un Container et pas une adresse de container
-
-void addContainer(Port *P, Container *C) {
-      int i = 0;
-      while(i < P->size) {
-
-      }
-}
-
 void draw(Port *P) {
-    for(int i = 0; i < P->height; i++) { // Les hauteurs
-      for(int j = 0; i < P->width; i++) { // Les largeurs
-        if(P->baie[j][i]->id_container < 10){
-          printf(" %s ", P->baie[j][i]->name);
+    printf("|");
+    for(int i = 0; i < P->maxHeight; i++) { // Les hauteurs
+      for(int j = 0; j < P->maxWidth; j++) { // Les largeurs
+        if(P->baie[j][i] != NULL) {
+          if(P->baie[j][i]->id_container < 10){
+            printf(" %s ", P->baie[j][i]->name);
+          }else{
+            printf(" %s", P->baie[j][i]->name);
+          }
         }else{
-          printf(" %s", P->baie[j][i]->name);
+          printf("     ");
         }
       }
-      printf("\n");
+      printf("|\n|");
     }
   }
 
-void placerContainer(Port *P) {
-  int caractereLu = 0;
-  int ligne = 0;
+int placerContainer(Port *P, Data *D) {
+  char filename[40];
+  sprintf(filename, "instances/%d_position.csv", INSTANCE);
   FILE *fp = NULL;
-  fp = fopen("instances/1_position.csv", "r");
+  fp = fopen(filename, "r");
+
 
   if (fp == NULL) {
       printf("\nImpossible de charger l'instance");
       return 0;
   }
-
-  while (caractereLu != EOF){
-    if (ligne>0)
-      {
-        Container *C = (Container *)malloc(sizeof(Container));
-        fseek(fp, 21, SEEK_SET);
-        fscanf(fp, "%s, %d, %d", C->name, C->posX, C->posY);
-        C->id_container = ligne;
-        P->baie[PosX-1][P->height-PosY]=C;
-      }
-    ligne++;
+  
+  P->baie = (Container***) malloc(P->maxWidth * sizeof(Container**));
+  D->liste_containers = (Container**) malloc(P->nb_container * sizeof(Container*));
+  for(int i = 0; i < P->maxWidth; i++) {
+    P->baie[i] = (Container**) malloc(P->maxHeight * sizeof(Container*));
   }
+  P->heights = (int*) malloc(P->maxWidth * sizeof(int));
+  for(int i = 0; i < P->maxWidth; i++){
+    P->heights[i] = 0;
+  }
+  // Donc si on résume P[x][y] est un Container et pas une adresse de container
 
+  int i = 1;
+
+  fseek(fp, 21, SEEK_SET);
+
+  for(int i = 0; i < P->nb_container; i++){
+      Container *C = (Container *)malloc(sizeof(Container));
+      fscanf(fp, "%s , %d , %d", C->name, &C->posX, &C->posY);
+      printf("%s -- %d -- %d\n", C->name, C->posX, C->posY);
+      C->id_container = i+1;
+      if(C->posX == 0 && C->posY == 0){
+        C->placed = 0;
+      }else{
+        C->placed = 1;
+        P->baie[C->posX-1][P->maxHeight-C->posY] = C;
+        P->heights[C->posY]++;
+      }
+      D->liste_containers[i] = C;
+  }
+}
+int main(int argc, char const *argv[]) {
+  Port P;
+  Data D;
+  initContainer(&P);
+  placerContainer(&P, &D);
+  draw(&P);
+  return 0;
 }
