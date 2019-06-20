@@ -85,13 +85,16 @@ int placerContainer(Port *P, Data *D) {
   }
 }
 
-int moveContainer(Port P, Container C) {
-  int former_PosX = posX-1; // position x dans le matrice
-  int former_PosY = P->maxHeight-posY; // position y dans la matrice
-  P->baie[former_PosX-1][P->maxHeight-former_PosY]=NULL; // enlever le conteneur de l'ancienne nouv_pile
-  nouv_PosX = 0;
-  while (heights[nouv_PosX]<4 ||nouv_PosX!=formerPosX){
-
+int moveContainer(Port *P, Container *C) {
+  P->baie[C->posX-1][P->maxHeight-C->posY]=NULL; // enlever le conteneur de l'ancienne nouv_pile
+  for(int i = 0; i < P->maxWidth; i++) {
+    if(P->heights[i] < P->maxHeight || i != C->posX-1 ){ //on déplace le container dans la première colonne libre différente de la précédente
+      P->baie[i][P->maxHeight-P->heights[i]-1] = C;
+      C->placed = 1;
+      C->posX = i+1;
+      C->posY = P->maxHeight-(P->maxHeight-P->heights[i]-1);
+      printf("The container %s has been placed at [%d, %d]\n", C->name, i, P->maxHeight-P->heights[i]-1);
+    }
   }
 
 }
