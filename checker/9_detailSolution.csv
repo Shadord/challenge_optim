@@ -235,21 +235,14 @@ Relocalisation du container 25 (pile 1 vers pile 2)
    17   15   16    0    0
    18   22   20   23   19
 
-Relocalisation du container 21 (pile 1 vers pile 2)
+Relocalisation du container 21 (pile 1 vers pile 4)
     0    0    0    0    0
-    0   21    0    0    0
+    0    0    0    0    0
    13   25    0    0    0
-   17   15   16    0    0
+   17   15   16   21    0
    18   22   20   23   19
 
 Retrait du container 13 (pile 1)
-    0    0    0    0    0
-    0   21    0    0    0
-    0   25    0    0    0
-   17   15   16    0    0
-   18   22   20   23   19
-
-Relocalisation du container 21 (pile 2 vers pile 4)
     0    0    0    0    0
     0    0    0    0    0
     0   25    0    0    0
@@ -403,4 +396,4 @@ Retrait du container 25 (pile 5)
     0    0    0    0    0
     0    0    0    0    0
 
-Nombre de relocalisations : 22
+Nombre de relocalisations : 21

@@ -214,7 +214,7 @@ void addContainercolumn(Port *P, Container *C_a_add){
       if(dpl != -1 && P->heights[dpl] < P->maxHeight) {
         back = C_a_add->posX;
         C_a_add->posX = dpl;
-        extFichier(back-1, C_a_add->posX);
+        extFichier(back, C_a_add->posX);
         C_a_add->posY = P->maxHeight-P->heights[dpl]-1;
         printf("Ajout du container %s à [%d, %d]\n", C_a_add->name, C_a_add->posX, C_a_add->posY);
         P->baie[C_a_add->posX][C_a_add->posY] = C_a_add;
@@ -226,7 +226,7 @@ void addContainercolumn(Port *P, Container *C_a_add){
       if(P->heights[i] < P->maxHeight && i != C_a_add->posX){
         back = C_a_add->posX;
         C_a_add->posX = i;
-        extFichier(back-1, C_a_add->posX);
+        extFichier(back, C_a_add->posX);
         C_a_add->placed = 1;
         C_a_add->posY = P->maxHeight-P->heights[i]-1;
         printf("Ajout du container %s às [%d, %d]\n", C_a_add->name, C_a_add->posX, C_a_add->posY);
