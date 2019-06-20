@@ -53,7 +53,7 @@ int placerContainer(Port *P, Data *D) {
       printf("\nImpossible de charger l'instance");
       return 0;
   }
-  
+
   P->baie = (Container***) malloc(P->maxWidth * sizeof(Container**));
   D->liste_containers = (Container**) malloc(P->nb_container * sizeof(Container*));
   for(int i = 0; i < P->maxWidth; i++) {
@@ -84,6 +84,20 @@ int placerContainer(Port *P, Data *D) {
       D->liste_containers[i] = C;
   }
 }
+
+int moveContainer(Port P, Container C) {
+  int former_PosX = posX-1; // position x dans le matrice
+  int former_PosY = P->maxHeight-posY; // position y dans la matrice
+  P->baie[former_PosX-1][P->maxHeight-former_PosY]=NULL; // enlever le conteneur de l'ancienne nouv_pile
+  nouv_PosX = 0;
+  while (heights[nouvPos_X]<4 ||nouv_PosX!=formerPosX)
+
+}
+
+
+
+
+
 int main(int argc, char const *argv[]) {
   Port P;
   Data D;
