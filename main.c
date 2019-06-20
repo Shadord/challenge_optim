@@ -96,6 +96,18 @@ int moveContainer(Port P, Container C) {
 
 }
 
+int addContainer(Port *P, Container *C) {
+  if(C->placed == 1){
+    printf("The container %s is already placed\n", C->name);
+  }
+  for(int i = 0; i < P->maxWidth; i++) {
+    if(P->heights[i] < P->maxHeight){ // On peut ajouter le container dans cette colonne
+      P->baie[i][P->maxHeight-P->heights[i]-1] = C;
+      C->placed = 1;
+      printf("The container %s has been placed at [%d, %d]\n", C->name, i, P->maxHeight-P->heights[i]-1);
+    }
+  }
+}
 
 
 
