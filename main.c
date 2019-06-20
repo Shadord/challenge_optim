@@ -1,10 +1,8 @@
 #include "stdio.h"
 #include "string.h"
 
-void initContener() {
+void initContener(int nb_conteneurs, int largeur, int hauteur) {
     FILE* fp = NULL;
-    int nbmots = 0, numMotChoisi = 0;
-    int caractereLu = 0;
     fp = fopen("instances/1_global.csv", "r");
 
 
@@ -13,10 +11,12 @@ void initContener() {
         return 0;
     }
     do {
-        fscanf(fp, "%d , %d , %d", )
-    } while(caractereLu != EOF);
-
+        fscanf(fp, "%d , %d , %d", nb_conteneurs, largeur, hauteur);
+    } 
 
     fclose(fp);
     return 1;
   }
+
+
+
